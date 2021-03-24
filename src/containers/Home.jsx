@@ -1,6 +1,6 @@
 import Discription from '../components/Discription';
 import SuccessModal from '../components/SuccessModal';
-import logo from '../images/4241298_s.jpg';
+import logo from '../images/54B27462-05DE-48F6-8AC6-2719D14755E4.jpg';
 import {lows} from '../util/lows';
 import {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';

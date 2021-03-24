@@ -1,0 +1,171 @@
+Home.jsx
+
+import Discription from '../components/Discription';
+import logo from '.././images/4241298_s.jpg';
+import React,{useEffect, useState, useRef} from 'react';
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import {makeStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+const {lows} = require('../util/lows');
+
+const useStyles = makeStyles(() => ({
+    logo: {
+        width: '400px',
+    },
+    inputBox: {
+        padding: "30px",
+        marginBottom: "30px",
+    },
+    greenFont: {
+        color: '#689f38',
+        display: 'inline',
+        fontFamily: 'Times New Roman',
+        fontSize: '20px'
+    },
+    redFont: {
+        backgroundColor: "#e0e0e0",
+        color: "red",
+        display: "inline",
+        fontFamily: "Times New Roman",
+        fontSize: "20px"
+
+    },
+    greyFont: {
+        color: "grey",
+        display: "inline",
+        fontFamily: "Times New Roman",
+        fontSize: "20px"
+    },
+    blackFont: {
+        backgroundColor: "#e0e0e0",
+        display: "inline",
+        fontFamily: "Times New Roman",
+        fontSize: "20px"
+
+    },
+    stats: {
+        display: "inline",
+        fontSize: "20px",
+        margin: "0 30px",
+    },
+    rights: {
+        fontSize: "20px",
+        padding: "20px",
+    },
+}))
+
+const Home = () => {
+
+    const classes = useStyles();
+    const [typingString, setTypingString] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isMisstype, setIsMisstype] = useState(false);
+    const [missCount, setMissCount] = useState(0);
+    const [finished, setFinished] = useState(false);
+    const [started, setStarted] = useState(false);
+    const [timeOfTyping, setTimeOfTyping] = useState(0);
+    const [refresh, setRefresh] = useState('');
+
+    let timer = useRef(null);
+
+    useEffect(() => {
+        setLoading(true)
+        let word = lows[Math.floor(Math.random() * (5))].letter;
+        const newTypingString = word
+        setTypingString(newTypingString);
+        setLoading(false);
+    }, [refresh]);
+
+    const handleKeyPress = (e) => { 
+        if (finished) return; // タイプ(ゲーム)が終わっていたらイベントは起きない
+        if (!started) {
+            setStarted(true);
+            const startTime = new Date().getTime();
+            timer.current = setInterval(() => {
+                setTimeOfTyping((new Date().getTime()) - startTime)
+            }, 10) //タイムを計測するための関数
+        }
+        if (e.key === typingString[currentIndex]) {
+            setIsMisstype(false);
+            setCurrentIndex(currentIndex + 1); //タイプがあっていたら、次の文字に進む
+            if (currentIndex + 1 >= typingString.length) {
+                clearInterval(timer.current);
+                setFinished(true); // すべての文字のタイプし終えたらmodal(結果)が開く
+            }
+        } else {
+            setIsMisstype(true);
+            setMissCount(missCount + 1) //間違ったタイプをすると、ミスタイプが増える
+        }
+    } // タイプされたらゲームをはじめるための関数
+
+    const refreshAll = () => {
+        setLoading(false);
+        setCurrentIndex(0);
+        setIsMisstype(false);
+        setMissCount(0);
+        setFinished(false);
+        setStarted(false);
+        setTimeOfTyping(0);
+        setRefresh(Math.random())
+    } //もう一度ボタンが押されたときの処理関数
+
+    const timeFormatting = (ms) => {
+    let s = ms / 1000;
+    if (s >= 60) {
+        let m = Math.floor(s / 60)
+        s = s % 60;
+        return m + ':' + s.toFixed(2)
+    } else {
+        return s.toFixed(2)
+    }
+}
+
+    return (
+        loading ? (
+            <p>少々お待ちください</p>
+        ) : (
+            <div align="center" >
+                <img src={logo} alt="logo" className={classes.logo} />
+                <Discription />
+                <div onKeyPress={(e) => handleKeyPress(e)} tabIndex={0} className={classes.inputBox}>
+                    <Typography className={classes.greenFont}>
+                        {typingString.slice(0, currentIndex)}
+                    </Typography> {/* 終わった文字は緑色 */}
+                    {isMisstype ? (
+                        <Typography className={classes.redFont}>
+                            {typingString[currentIndex]}
+                        </Typography> /* 間違えたら赤色 */
+                    ) : (
+                        <Typography className={classes.blackFont}>
+                            {typingString[currentIndex]}
+                        </Typography> // 間違えてない間は黒色
+                    )}
+
+                    <Typography className={classes.greyFont}>
+                        {typingString.slice(currentIndex + 1, typingString.length)}
+                    </Typography> {/* まだ打ち込んでない文字はグレー色 */}
+                </div> {/*英単語の部分*/}
+                <Box display="flex" justifyContent="center">
+                    <Typography className={classes.stats}>
+                        ミスタイプ: {missCount}回
+                        </Typography>
+                    <Typography className={classes.stats}>
+                        タイム: {timeFormatting(timeOfTyping)}
+                    </Typography>
+                </Box>
+                <Box marginBottom="50px">
+                    <Typography className={classes.stats}>
+                        CPM:  {(currentIndex === 0) ? "-" : (currentIndex / timeOfTyping * 1000 * 60).toFixed(0)}
+                    </Typography>
+                </Box>
+                <Button onClick={refreshAll} variant='contained' color='primary'>次へ</Button>
+            </div>
+        )
+
+    )
+}
+
+export default Home;
+
