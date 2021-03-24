@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
-import { Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     content: {
         fontsize: '20px',
         fontFamily: 'monospace',
-    }
+    },
 }));
 
 const SuccessModal = (props) => {
@@ -58,6 +58,7 @@ const SuccessModal = (props) => {
                                 正答率: {Math.floor(correctAnswerRate)} %
                             </Typography>
                         </div>
+                        <Button onClick={props.frominit} color='secondary' variant='contained'>最初から</Button>
                     </div>
                 </Fade>
             </Modal>

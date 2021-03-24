@@ -33,6 +33,9 @@ const useStyles = makeStyles(() => ({
     nextBtn: {
         margin: '60px'
     },
+    init: {
+        margin: '60px'
+    },
     numberbottom: {
         marginBottom: '30px'
     },
@@ -87,6 +90,13 @@ const Home = () => {
         setLoading(false);
         setUserAnswer(''); // 「次の問題へ」が押されたら解答欄の中身を消す
     };
+
+    const frominit = () => {
+        setCorrect(0);
+        setUnCorrect(0);
+        setModalOpen(false);
+        setNext(Math.random());
+    };
     
     const answerSubmit = () => {
         if (userAnswer === answer) {
@@ -139,11 +149,13 @@ const Home = () => {
                     </Typography>
                 </div>
                 <Button className={classes.nextBtn} onClick={nextquiz} color='secondary' variant='contained'>次の問題へ</Button>
+                <Button className={classes.init} onClick={frominit} color='secondary' variant='contained'>最初から</Button>
                 <SuccessModal
                     result={{
                         correct,
                         unCorrect
                     }}
+                    frominit={frominit}
                     modalOpen={modalOpen}
                     modalClose={() => setModalOpen(false)}
                 />
