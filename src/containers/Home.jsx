@@ -9,7 +9,9 @@ import { Button, TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
     logo: {
-        width: '400px'
+        width: '100%',
+        height: '200px',
+        objectFit: 'cover',
     },
     inputBox: {
         padding: '30px',
