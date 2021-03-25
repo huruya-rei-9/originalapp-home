@@ -51,6 +51,12 @@ const useStyles = makeStyles(() => ({
         display: 'inline',
         margin: '30px',
     },
+    answerModal: {
+        margin: '30px',
+    },
+    answerModalSpan: {
+        color: 'red',
+    },
 }))
 
 const Home = () => {
@@ -65,7 +71,9 @@ const Home = () => {
     const [userAnswer, setUserAnswer] = useState('');
     const [correct, setCorrect] = useState(0);
     const [unCorrect, setUnCorrect] = useState(0);
+    const [disabled, setDisabled] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const [answerModalOpen, setAnswerModalOpen] = useState(false);
     const [next, setNext] = useState('');
     
     console.log('再レンダリングされました');
@@ -96,28 +104,32 @@ const Home = () => {
         setLoading(true);
         setNext(Math.random());
         setModalOpen(false);
-        setLoading(false);
         setUserAnswer(''); // 「次の問題へ」が押されたら解答欄の中身を消す
+        setAnswerModalOpen(false);
+        setDisabled(false);
+        setLoading(false);
     };
 
     const frominit = () => {
         setCorrect(0);
         setUnCorrect(0);
         setModalOpen(false);
+        setAnswerModalOpen(false);
+        setDisabled(false);
         setNext(Math.random());
     };
     
     const answerSubmit = () => {
+        setDisabled(true);
         if (userAnswer === answer) {
             console.log('〇');
             setCorrect(correct + 1);
         } else {
             console.log('×');
             setUnCorrect(unCorrect + 1);
+            setAnswerModalOpen(true);
         }
-        
     }
-    
 
     return (
         loading ? (
@@ -141,7 +153,14 @@ const Home = () => {
                     </Typography>
                     <div className={classes.answer}>
                         <form>
-                            <TextField value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)} type='text' label='解答欄' variant='outlined'/>
+                            <TextField
+                                value={userAnswer}
+                                onChange={(e) => setUserAnswer(e.target.value)}
+                                disabled={disabled}
+                                type='text'
+                                label='解答欄'
+                                variant='outlined'
+                            />
                             <Button color='primary' variant='contained' onClick={answerSubmit}>決定</Button>
                         </form>
                     </div>
@@ -151,6 +170,9 @@ const Home = () => {
                     <Typography className={classes.uncorrect}>
                         不正解数: {unCorrect}
                     </Typography>
+                    <Typography className={classes.answerModal} style={{display: answerModalOpen ? 'block' : 'none'}}>
+                        <span className={classes.answerModalSpan}>解答:</span> {answer}
+                    </Typography> 
                 </div>
                 <Button className={classes.nextBtn} onClick={nextquiz} color='secondary' variant='contained'>次の問題へ</Button>
                 <Button className={classes.init} onClick={frominit} color='secondary' variant='contained'>最初から</Button>
