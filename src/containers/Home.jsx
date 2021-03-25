@@ -68,6 +68,7 @@ const Home = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [next, setNext] = useState('');
     
+    console.log('再レンダリングされました');
     
     useEffect(() => {
         setLoading(true);
@@ -81,8 +82,16 @@ const Home = () => {
         setnewNumber(newNumber);
         setLowString(newString);
         setLoading(false);
+        console.log('useEffectが動きました')
     }, [next]);
     
+    useEffect(() => {
+        if ((correct + unCorrect) === 10) {
+            console.log('ゲーム終わり');
+            setModalOpen(true);
+        } // ゲーム終了のきっかけ
+    }, [correct, unCorrect]);
+
     const nextquiz = () => {
         setLoading(true);
         setNext(Math.random());
@@ -107,13 +116,8 @@ const Home = () => {
             setUnCorrect(unCorrect + 1);
         }
         
-        if ((correct + unCorrect) === 10) {
-            console.log('ゲーム終わり');
-            setModalOpen(true);
-        } // ゲーム終了のきっかけ
     }
     
-    console.log(correct + unCorrect);
 
     return (
         loading ? (
