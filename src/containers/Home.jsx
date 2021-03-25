@@ -161,7 +161,7 @@ const Home = () => {
                                 label='解答欄'
                                 variant='outlined'
                             />
-                            <Button color='primary' variant='contained' onClick={answerSubmit}>決定</Button>
+                            <Button disabled={disabled} color='primary' variant='contained' onClick={answerSubmit}>決定</Button>
                         </form>
                     </div>
                     <Typography className={classes.correct}>
@@ -174,7 +174,7 @@ const Home = () => {
                         <span className={classes.answerModalSpan}>解答:</span> {answer}
                     </Typography> 
                 </div>
-                <Button className={classes.nextBtn} onClick={nextquiz} color='secondary' variant='contained'>次の問題へ</Button>
+                <Button disabled={!disabled} className={classes.nextBtn} onClick={nextquiz} color='secondary' variant='contained'>次の問題へ</Button>
                 <Button className={classes.init} onClick={frominit} color='secondary' variant='contained'>最初から</Button>
                 <SuccessModal
                     result={{
