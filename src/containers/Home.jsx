@@ -116,6 +116,7 @@ const Home = () => {
         setModalOpen(false);
         setAnswerModalOpen(false);
         setDisabled(false);
+        setUserAnswer('');
         setNext(Math.random());
     };
     
