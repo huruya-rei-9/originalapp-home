@@ -54,9 +54,6 @@ const useStyles = makeStyles(() => ({
     answerModal: {
         margin: '30px',
     },
-    answerModalSpan: {
-        color: 'red',
-    },
 }))
 
 const Home = () => {
@@ -172,7 +169,7 @@ const Home = () => {
                         不正解数: {unCorrect}
                     </Typography>
                     <Typography className={classes.answerModal} style={{display: answerModalOpen ? 'block' : 'none'}}>
-                        <span className={classes.answerModalSpan}>解答:</span> {answer}
+                        <span style={{color: 'red'}}>解答:</span> {answer}
                     </Typography> 
                 </div>
                 <Button disabled={!disabled} className={classes.nextBtn} onClick={nextquiz} color='secondary' variant='contained'>次の問題へ</Button>
