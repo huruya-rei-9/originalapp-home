@@ -133,7 +133,7 @@ const Home = () => {
         loading ? (
             <p>loading...</p>
         ) : (
-            <div align='center'>
+            <div>
                 <img src={logo} alt="logo" className={classes.logo}/>
                 <Discription/>
                 <div className={classes.inputBox}>
