@@ -1,5 +1,6 @@
 import Discription from '../components/Discription';
 import SuccessModal from '../components/SuccessModal';
+import Nav from '../components/nav';
 import logo from '../images/54B27462-05DE-48F6-8AC6-2719D14755E4.jpg';
 import {lows} from '../util/lows';
 import {useEffect, useState} from 'react';
@@ -8,6 +9,12 @@ import { Button, TextField, Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles(() => ({
+    root: {
+        textAlign: 'center',
+        backgroundColor: '#eee',
+        maxWidth: '800px',
+        margin: '0 auto',
+    },
     logo: {
         width: '100%',
         height: '200px',
@@ -54,7 +61,12 @@ const useStyles = makeStyles(() => ({
     answerModal: {
         margin: '30px',
     },
-}))
+    footer: {
+        backgroundColor: '#bdbdbd',
+        fontSize: '25px',
+        padding: '20px',
+    },
+}));
 
 const Home = () => {
 
@@ -133,7 +145,8 @@ const Home = () => {
         loading ? (
             <p>loading...</p>
         ) : (
-            <div>
+            <div className={classes.root}>
+                <Nav />
                 <img src={logo} alt="logo" className={classes.logo}/>
                 <Discription/>
                 <div className={classes.inputBox}>
@@ -183,6 +196,7 @@ const Home = () => {
                     modalOpen={modalOpen}
                     modalClose={() => setModalOpen(false)}
                 />
+                <footer className={classes.footer}>© 2021 Riku Ganeko</footer>
             </div>
         )
     )
