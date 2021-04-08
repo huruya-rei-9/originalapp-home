@@ -27,7 +27,7 @@ const Nav = () => {
     // console.log(state)
 
     const classes = useStyles();
-    const [value, setValue] = useState(0); // 本当は0ではなく何も入っていないのが理想
+    const [value, setValue] = useState(); // 本当は0ではなく何も入っていないのが理想
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -40,7 +40,7 @@ const Nav = () => {
 
     const ToOpinion = () => {
         console.log('opinionに移動')
-        history.push('/opinionbox')
+        history.push('/opinionbox');
     };
 
     const logout = () => {

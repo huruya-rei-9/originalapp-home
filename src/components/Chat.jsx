@@ -7,8 +7,12 @@ import {useEffect, useState, useContext} from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
+    root: {
+        textAlign: 'center',
+        maxWidth: '800px',
+        margin: '0 auto',
+    },
     card: {
-        width: '100%',
         padding: '15px',
         margin: '10px',
     },
@@ -73,29 +77,32 @@ const Chat = () => {
     }
 
     return <>
-        <Nav />
-        <Typography>ユーザー全員が見れるチャットページです！<br />お互いに励ましあいましょう</Typography>
-        <div>
-            {messages.map((message) => (
-                <Card key={message.id} className={classes.card}>
-                    <CardHeader
-                        title={message.username}
-                        action={(user.data.uid === message.authorId) && <Button onClick={() => {deleteChat(message.id)}}><DeleteIcon /></Button>} // user.data.uid === message.authorId の時のみ削除ボタン表示
-                    />
-                    <CardContent>
-                        <Typography>{message.content}</Typography>
-                    </CardContent>
-                </Card>
-                // <Card key={message.id} className={classes.card}>
-                //     <Typography>{message.username}</Typography>
-                //     <Typography>{message.content}</Typography>
-                // </Card>
-            ))}
+        <div className={classes.root}>
+            <Nav />
+            <Typography>ユーザー全員が見れるチャットページです！<br />お互いに励ましあいましょう</Typography>
+            <div>
+                {messages.map((message) => (
+                    <Card key={message.id} className={classes.card}>
+                        <CardHeader
+                            title={message.username}
+                            action={(user.data.uid === message.authorId) && <Button onClick={() => {deleteChat(message.id)}}><DeleteIcon /></Button>} // user.data.uid === message.authorId の時のみ削除ボタン表示
+                        />
+                        <CardContent>
+                            <Typography>{message.content}</Typography>
+                        </CardContent>
+                    </Card>
+                    // <Card key={message.id} className={classes.card}>
+                    //     <Typography>{message.username}</Typography>
+                    //     <Typography>{message.content}</Typography>
+                    // </Card>
+                ))}
+            </div>
+            <form onSubmit={addChat}>
+                <TextField value={text} onChange={(e) => setText(e.target.value)} variant='outlined' />
+                <Button disabled={text === ''} type='submit' variant='contained'>チャットを送信</Button>
+            </form>
+
         </div>
-        <form onSubmit={addChat}>
-            <TextField value={text} onChange={(e) => setText(e.target.value)} variant='outlined' />
-            <Button disabled={text === ''} type='submit' variant='contained'>チャットを送信</Button>
-        </form>
     </>
 
 }

@@ -6,12 +6,13 @@ import {auth} from '../firebase/config';
 
 const useStyles = makeStyles({
     root: {
-        width: '500px',
         height: '500px',
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        textAlign: 'center',
+        maxWidth: '800px',
     },
 });
 
