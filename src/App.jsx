@@ -8,6 +8,7 @@ import {AuthProvider} from './context/AuthContext';
 import LoggedInRoute from './components/LoggedInRoute';
 import Administrator from './administrator';
 import Chat from './components/Chat';
+import UserHome from './components/UserHome';
 
 const App = () => {
     return (
@@ -17,6 +18,11 @@ const App = () => {
             <Route exact path='/'>
               <LoggedInRoute>
                 <Home />
+              </LoggedInRoute>
+            </Route>
+            <Route exact path='/userhome'>
+              <LoggedInRoute>
+                <UserHome />
               </LoggedInRoute>
             </Route>
             <Route exact path='/opinionbox'>

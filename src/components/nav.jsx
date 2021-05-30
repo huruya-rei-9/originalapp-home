@@ -33,6 +33,11 @@ const Nav = () => {
       setValue(newValue);
     };
 
+    const ToUserHome = () => {
+      console.log('UserHomeに移動')
+      history.push('/userhome')
+    }
+
     const ToHome = () => {
         console.log('homeに移動')
         history.push('/');
@@ -64,10 +69,11 @@ const Nav = () => {
           textColor="primary"
           centered
         >
-          <Tab onClick={ToHome} label="HOME" icon={<HomeIcon />} /> {/*value=0*/}
-          <Tab onClick={ToChat} label="チャット" icon={<ChatIcon />} /> {/*value=1*/}
-          <Tab onClick={ToOpinion} label="ご意見はこちら" icon={<HowToVoteIcon />} /> {/*value=2*/}
-          <Tab onClick={logout} label="ログアウト" icon={<ExitToAppIcon/>} /> {/*value=3*/}
+          <Tab onClick={ToUserHome} label="ユーザー" icon={<HomeIcon />}/> {/*value=0*/}
+          <Tab onClick={ToHome} label="HOME" icon={<HomeIcon />} /> {/*value=1*/}
+          <Tab onClick={ToChat} label="チャット" icon={<ChatIcon />} /> {/*value=2*/}
+          <Tab onClick={ToOpinion} label="ご意見はこちら" icon={<HowToVoteIcon />} /> {/*value=3*/}
+          <Tab onClick={logout} label="ログアウト" icon={<ExitToAppIcon/>} /> {/*value=4*/}
         </Tabs>
       </Paper>
     );
