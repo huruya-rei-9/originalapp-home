@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import BusinessIcon from '@material-ui/icons/Business';
 import HomeIcon from '@material-ui/icons/Home';
 import ChatIcon from '@material-ui/icons/Chat';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -70,7 +71,7 @@ const Nav = () => {
           centered
         >
           <Tab onClick={ToUserHome} label="ユーザー" icon={<HomeIcon />}/> {/*value=0*/}
-          <Tab onClick={ToHome} label="HOME" icon={<HomeIcon />} /> {/*value=1*/}
+          <Tab onClick={ToHome} label="学習する" icon={<BusinessIcon />} /> {/*value=1*/}
           <Tab onClick={ToChat} label="チャット" icon={<ChatIcon />} /> {/*value=2*/}
           <Tab onClick={ToOpinion} label="ご意見はこちら" icon={<HowToVoteIcon />} /> {/*value=3*/}
           <Tab onClick={logout} label="ログアウト" icon={<ExitToAppIcon/>} /> {/*value=4*/}

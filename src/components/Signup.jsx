@@ -32,7 +32,7 @@ const Signup = () => {
                     .updateProfile({displayName: username})
                     .then(() => {
                         console.log('ユーザー作成成功', userCredential);
-                        history.push('/');
+                        history.push('/userhome');
                     })
             })
             .catch((error) => {

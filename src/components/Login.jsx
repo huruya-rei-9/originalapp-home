@@ -28,7 +28,7 @@ const Login = () => {
         auth
             .signInWithEmailAndPassword(email, password)
             .then(() => {
-                history.push('/');
+                history.push('/userhome');
             })
             .catch((error) => {
                 console.log('ログイン失敗', error);
