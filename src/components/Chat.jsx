@@ -1,4 +1,5 @@
 import Nav from './nav';
+import Footer from './Footer';
 import {Card, Button, TextField, Typography, CardHeader, CardContent} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import firebase, {db} from '../firebase/config';
@@ -101,7 +102,7 @@ const Chat = () => {
                 <TextField value={text} onChange={(e) => setText(e.target.value)} variant='outlined' />
                 <Button disabled={text === ''} type='submit' variant='contained'>チャットを送信</Button>
             </form>
-
+            <Footer />
         </div>
     </>
 

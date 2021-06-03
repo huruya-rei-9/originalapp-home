@@ -3,9 +3,15 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {auth} from '../firebase/config';
+import Footer from './Footer';
 
 const useStyles = makeStyles({
     root: {
+        textAlign: 'center',
+        maxWidth: '800px',
+        margin: '0 auto',
+    },
+    form: {
         height: '500px',
         margin: '0 auto',
         display: 'flex',
@@ -36,13 +42,16 @@ const Login = () => {
     }
  
     return (
-        <form className={classes.root} onSubmit={handleSubmit}>
-            <h1>ログインページ</h1>
-            <TextField value={email} onChange={(e) => setEmail(e.target.value)} fullWidth type='email' label='メールアドレス' variant='outlined'/>
-            <TextField value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type='password' label='パスワード' variant='outlined'/>
-            <Button type='submit' fullWidth color='secondary' variant='contained'>ログイン</Button>
-            <Link to='/signup'>アカウントをお持ちでない方はこちら</Link>
-        </form>
+        <div className={classes.root}>
+            <form className={classes.form} onSubmit={handleSubmit}>
+                <h1>ログインページ</h1>
+                <TextField value={email} onChange={(e) => setEmail(e.target.value)} fullWidth type='email' label='メールアドレス' variant='outlined'/>
+                <TextField value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type='password' label='パスワード' variant='outlined'/>
+                <Button type='submit' fullWidth color='secondary' variant='contained'>ログイン</Button>
+                <Link to='/signup'>アカウントをお持ちでない方はこちら</Link>
+            </form>
+            <Footer />
+        </div>
     )
 }
 

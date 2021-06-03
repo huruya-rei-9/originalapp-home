@@ -1,4 +1,5 @@
 import Nav from './nav';
+import Footer from './Footer';
 import {Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {AuthContext} from '../context/AuthContext';
@@ -23,6 +24,7 @@ const UserHome = () => {
         <div className={classes.root}>
             <Nav />
             <Typography>お帰りなさい。{user.data.displayName}さん！</Typography>
+            <Footer />
         </div>
     </>
 

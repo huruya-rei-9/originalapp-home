@@ -1,6 +1,7 @@
 import Discription from '../components/Discription';
 import SuccessModal from '../components/SuccessModal';
 import Nav from '../components/nav';
+import Footer from '../components/Footer';
 import logo from '../images/54B27462-05DE-48F6-8AC6-2719D14755E4.jpg';
 import {lows} from '../util/lows';
 import {useEffect, useState} from 'react';
@@ -60,11 +61,6 @@ const useStyles = makeStyles(() => ({
     },
     answerModal: {
         margin: '30px',
-    },
-    footer: {
-        backgroundColor: '#bdbdbd',
-        fontSize: '25px',
-        padding: '20px',
     },
 }));
 
@@ -196,7 +192,7 @@ const Home = () => {
                     modalOpen={modalOpen}
                     modalClose={() => setModalOpen(false)}
                 />
-                <footer className={classes.footer}>© 2021 Riku Ganeko</footer>
+                <Footer />
             </div>
         )
     )
