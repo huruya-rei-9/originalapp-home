@@ -18,6 +18,9 @@ const useStyles = makeStyles({
     flexGrow: 1,
     marginBottom: '30px',
   },
+  Tab: {
+    textTransform: "none",
+  },
 });
 
 
@@ -70,11 +73,11 @@ const Nav = () => {
           textColor="primary"
           centered
         >
-          <Tab onClick={ToUserHome} label="ユーザー" icon={<HomeIcon />}/> {/*value=0*/}
-          <Tab onClick={ToHome} label="学習する" icon={<BusinessIcon />} /> {/*value=1*/}
-          <Tab onClick={ToChat} label="チャット" icon={<ChatIcon />} /> {/*value=2*/}
-          <Tab onClick={ToOpinion} label="ご意見はこちら" icon={<HowToVoteIcon />} /> {/*value=3*/}
-          <Tab onClick={logout} label="ログアウト" icon={<ExitToAppIcon/>} /> {/*value=4*/}
+          <Tab className={classes.Tab} onClick={ToUserHome} label="user" icon={<HomeIcon />}/> {/*value=0*/}
+          <Tab className={classes.Tab} onClick={ToHome} label="study" icon={<BusinessIcon />} /> {/*value=1*/}
+          <Tab className={classes.Tab} onClick={ToChat} label="chat" icon={<ChatIcon />} /> {/*value=2*/}
+          <Tab className={classes.Tab} onClick={ToOpinion} label="opinion" icon={<HowToVoteIcon />} /> {/*value=3*/}
+          <Tab className={classes.Tab} onClick={logout} label="logout" icon={<ExitToAppIcon/>} /> {/*value=4*/}
         </Tabs>
       </Paper>
     );

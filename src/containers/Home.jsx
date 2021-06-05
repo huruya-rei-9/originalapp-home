@@ -12,7 +12,7 @@ import { Button, TextField, Typography } from '@material-ui/core';
 const useStyles = makeStyles(() => ({
     root: {
         textAlign: 'center',
-        backgroundColor: '#eee',
+        backgroundColor: '#EEFFFF',
         maxWidth: '800px',
         margin: '0 auto',
     },

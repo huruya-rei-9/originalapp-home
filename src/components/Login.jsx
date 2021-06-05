@@ -10,6 +10,7 @@ const useStyles = makeStyles({
         textAlign: 'center',
         maxWidth: '800px',
         margin: '0 auto',
+        backgroundColor: '#EEFFFF',
     },
     form: {
         height: '500px',
