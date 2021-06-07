@@ -1,5 +1,6 @@
 import {Button, TextField } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {auth} from '../firebase/config';
@@ -41,6 +42,17 @@ const Login = () => {
                 console.log('ログイン失敗', error);
             });
     }
+
+    const testClick = () => {
+        auth
+            .signInWithEmailAndPassword('test@try.com', '123456')
+            .then(() => {
+                history.push('/userhome');
+            })
+            .catch((error) => {
+                console.log('ログイン失敗', error);
+            });
+    };
  
     return (
         <div className={classes.root}>
@@ -50,6 +62,9 @@ const Login = () => {
                 <TextField value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type='password' label='パスワード' variant='outlined'/>
                 <Button type='submit' fullWidth color='secondary' variant='contained'>ログイン</Button>
                 <Link to='/signup'>アカウントをお持ちでない方はこちら</Link>
+                <Fab onClick={testClick} color='secondary' variant="extended">
+                    テストユーザーの方はこちら
+                </Fab>
             </form>
             <Footer />
         </div>

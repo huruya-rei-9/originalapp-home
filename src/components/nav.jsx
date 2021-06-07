@@ -71,7 +71,8 @@ const Nav = () => {
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
-          centered
+          variant="scrollable"
+          scrollButtons="off"
         >
           <Tab className={classes.Tab} onClick={ToUserHome} label="user" icon={<HomeIcon />}/> {/*value=0*/}
           <Tab className={classes.Tab} onClick={ToHome} label="study" icon={<BusinessIcon />} /> {/*value=1*/}
