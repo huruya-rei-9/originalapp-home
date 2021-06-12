@@ -55,7 +55,7 @@ const Signup = () => {
                 <TextField value={email} onChange={(e) => setEmail(e.target.value)} fullWidth type='email' label='メールアドレス' variant='outlined'/>
                 <TextField value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type='password' label='パスワード' variant='outlined'/>
                 <Button type='submit' fullWidth color='primary' variant='contained'>登録</Button>
-                <Link to='/login'>アカウントをお持ちの方はこちら</Link>
+                <Link to='/login'>アカウントをお持ちの方/テストユーザーの方はこちら</Link>
             </form>
             <Footer />
         </div>
