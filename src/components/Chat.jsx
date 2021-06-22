@@ -18,6 +18,9 @@ const useStyles = makeStyles({
         padding: '15px',
         margin: '10px',
     },
+    content: {
+        fontSize: '25px',
+    },
 })
 
 const Chat = () => {
@@ -85,13 +88,13 @@ const Chat = () => {
             <div>
                 {messages.map((message) => (
                     <Card key={message.id} className={classes.card}>
+                        <CardContent>
+                            <Typography className={classes.content}>{message.content}</Typography>
+                        </CardContent>
                         <CardHeader
                             title={message.username}
                             action={(user.data.uid === message.authorId) && <Button onClick={() => {deleteChat(message.id)}}><DeleteIcon /></Button>} // user.data.uid === message.authorId の時のみ削除ボタン表示
                         />
-                        <CardContent>
-                            <Typography>{message.content}</Typography>
-                        </CardContent>
                     </Card>
                     // <Card key={message.id} className={classes.card}>
                     //     <Typography>{message.username}</Typography>
