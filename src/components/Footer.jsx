@@ -14,7 +14,7 @@ const Footer = () => {
     const classes = useStyles();
 
     return (
-        <footer className={classes.footer}>© 2021 Riku Ganeko</footer>
+        <footer className={classes.footer}>© 2021 R</footer>
     );
 }
 
