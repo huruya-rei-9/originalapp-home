@@ -28,7 +28,7 @@ const UserHome = () => {
     return <>
         <div className={classes.root}>
             <Nav />
-            <Typography>お帰りなさい。{user.data.displayName}さん！</Typography>
+            <Typography>お帰りなさい, {user.data.displayName}さん！</Typography>
             <div className={classes.calendar}>
                 <Calendar />
             </div>
