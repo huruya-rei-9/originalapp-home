@@ -3,11 +3,11 @@ import SuccessModal from '../components/SuccessModal';
 import Nav from '../components/nav';
 import Footer from '../components/Footer';
 import logo from '../images/54B27462-05DE-48F6-8AC6-2719D14755E4.jpg';
-import {lows} from '../util/lows';
+// import {lows} from '../util/lows'; // ☆ ☆は教育基本法の文章の空欄が適当にランダムに選ばれるパターン(単語になってない場合もある)
 import {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import { Button, TextField, Typography } from '@material-ui/core';
-
+import Data from './lows.json'; // △ △は教育基本法の文章の空欄が文節でランダムに選ばれるパターン
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -68,10 +68,12 @@ const Home = () => {
 
     const classes = useStyles();
     const [loading, setLoading] = useState(false)
-    const [number, setnewNumber] = useState(0);
-    const [lowString, setLowString] = useState('');
-    const [index1, setIndex1] = useState(0);
-    const [index2, setIndex2] = useState(0);
+    const [number, setNumber] = useState(0);
+    // const [lowString, setLowString] = useState(''); // ☆
+    const [beginString, setBeginString] = useState(''); // △
+    const [endString, setEndString] = useState(''); // △
+    // const [index1, setIndex1] = useState(0); // ☆
+    // const [index2, setIndex2] = useState(0); // ☆
     const [answer, setAnswer] = useState('');
     const [userAnswer, setUserAnswer] = useState('');
     const [correct, setCorrect] = useState(0);
@@ -81,21 +83,62 @@ const Home = () => {
     const [answerModalOpen, setAnswerModalOpen] = useState(false);
     const [next, setNext] = useState('');
     
-    console.log('再レンダリングされました');
+    // console.log('再レンダリングされました');
     
     useEffect(() => {
+
+        // ----------------------------------------------------- △
+        
         setLoading(true);
-        let newNumber = lows[Math.floor(Math.random() * (lows.length))].number; // 配列lowsのnumberを取得
-        let newString = lows[newNumber - 1].letter; // 配列lowsのnumberに対するletterを取得
-        let r = Math.floor(Math.random() * (5)) + 1; // 1~5のランダム整数
-        let n = (Math.floor(Math.random() * (newString.length - 5)) + 6) - 5; // 6~newString.lengthのランダム整数
-        setIndex1(n);
-        setIndex2(r);
-        setAnswer(newString.slice(n, n + r)); // 解答を取得
-        setnewNumber(newNumber);
-        setLowString(newString);
+        let number = Math.floor(Math.random() * Data.length) + 1; //第〇条か選ぶ
+
+        let okarraynum = [];
+        for (let m = 0; m <= Data[number - 1].content.length - 1; m++) {
+            let len = Data[number - 1].content[m].length;
+            if (len >= 5) {
+                okarraynum.push(m)
+            }
+        } //文章を文節に分けた中でも5文字以上にやつを選び出し、その文節が入っている配列のインデックス番号をすべてokarraynumに入れる
+        let n = Math.floor(Math.random() * okarraynum.length); //okarraynumの要素数が2の場合、0～1のランダム整数nを作成
+        
+        let begin = [];
+        for (let i = 0; i <= okarraynum[n] - 1; i++) {
+            begin.push(Data[number - 1].content[i])
+        } //配列beginに解答の前までの部分を入れる
+        let beginning = begin.join(''); //配列beginの要素をすべてくっつけて文章にする
+        setBeginString(beginning);
+
+        let middle = Data[number - 1].content[okarraynum[n]];
+        setAnswer(middle); // 解答を取得
+
+        let end = [];
+        for (let i = okarraynum[n] + 1; i <= Data[number - 1].content.length - 1; i++) {
+            end.push(Data[number - 1].content[i])
+        } //配列endに解答の後の部分を入れる
+        let ending = end.join(''); //配列endの要素をすべてくっつけて文章にする
+        setEndString(ending);
+
+
+        setNumber(number);
         setLoading(false);
-        console.log('useEffectが動きました')
+        // console.log('useEffectが動きました')
+
+        // ----------------------------------------------------- △
+
+        // -------------------------------------------------------------------- // ☆
+        // setLoading(true);
+        // let newNumber = lows[Math.floor(Math.random() * (lows.length))].number; // 配列lowsのnumberを取得
+        // let newString = lows[newNumber - 1].letter; // 配列lowsのnumberに対するletterを取得
+        // let r = Math.floor(Math.random() * (5)) + 1; // 1~5のランダム整数
+        // let n = (Math.floor(Math.random() * (newString.length - 5)) + 6) - 5; // 6~newString.lengthのランダム整数
+        // setIndex1(n);
+        // setIndex2(r);
+        // setAnswer(newString.slice(n, n + r)); // 解答を取得
+        // setnewNumber(newNumber);
+        // setLowString(newString);
+        // setLoading(false);
+        // // console.log('useEffectが動きました')
+        // -------------------------------------------------------------------- // ☆
     }, [next]);
     
     useEffect(() => {
@@ -150,13 +193,15 @@ const Home = () => {
                         第{number}条
                     </Typography>
                     <Typography className={classes.lowtextup}>
-                        {lowString.slice(0, index1)}
+                        {/* {lowString.slice(0, index1)} */} {/*☆*/}
+                        {beginString} {/*△*/}
                     </Typography>
                     <Typography className={classes.lowtextmiddle}>
                         ?????
                     </Typography>
                     <Typography className={classes.lowtextdown}>
-                        {lowString.slice(index1 + index2, lowString.length - 1)}
+                        {/* {lowString.slice(index1 + index2, lowString.length - 1)} */} {/*☆*/}
+                        {endString} {/*△*/}
                     </Typography>
                     <div className={classes.answer}>
                         <form>
